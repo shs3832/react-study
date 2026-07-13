@@ -129,7 +129,7 @@ input:focus-visible {
 }
 
 .key-demo-header h3,
-.key-demo-card h4 {
+.study-card h4 {
   margin: 6px 0 8px;
   color: var(--text-h);
 }
@@ -140,13 +140,26 @@ input:focus-visible {
   gap: 16px;
 }
 
-.key-demo-card {
+.study-card {
   padding: 18px;
   border: 1px solid var(--border);
   border-radius: 12px;
 }
 
-.key-demo-card ul {
+.study-card-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.study-card-actions {
+  color: var(--text);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.study-card ul {
   display: grid;
   gap: 12px;
   margin: 18px 0;
@@ -154,18 +167,18 @@ input:focus-visible {
   list-style: none;
 }
 
-.key-demo-card li,
-.key-demo-card label {
+.study-card li,
+.study-card label {
   display: grid;
   gap: 6px;
 }
 
-.key-demo-card li {
+.study-card li {
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
 }
 
-.key-demo-card input {
+.study-card input {
   min-width: 0;
   padding: 8px 10px;
   border: 1px solid var(--border);
