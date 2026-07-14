@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import ArrayStateExample from "./examples/ArrayStateExample";
+import ImmerComparisonExample from "./examples/ImmerComparisonExample";
 import KeyIdentityExample from "./examples/KeyIdentityExample";
 import ObjectStateExample from "./examples/ObjectStateExample";
 import ReducerExample from "./examples/ReducerExample";
@@ -15,7 +16,8 @@ type ExampleName =
   | "array"
   | "key"
   | "reducer"
-  | "taskReducer";
+  | "taskReducer"
+  | "immer";
 
 const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "render", label: "렌더링과 state" },
@@ -25,11 +27,12 @@ const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "key", label: "목록 key 비교" },
   { id: "reducer", label: "useReducer" },
   { id: "taskReducer", label: "할 일 reducer" },
+  { id: "immer", label: "Immer 비교" },
 ];
 
 function App() {
   const [selectedExample, setSelectedExample] =
-    useState<ExampleName>("taskReducer");
+    useState<ExampleName>("immer");
 
   function renderExample() {
     switch (selectedExample) {
@@ -45,6 +48,8 @@ function App() {
         return <ReducerExample />;
       case "taskReducer":
         return <TaskReducerExample />;
+      case "immer":
+        return <ImmerComparisonExample />;
       case "object":
         return <ObjectStateExample />;
     }
