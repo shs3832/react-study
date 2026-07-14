@@ -3,10 +3,19 @@ import "./App.css";
 import ArrayStateExample from "./examples/ArrayStateExample";
 import KeyIdentityExample from "./examples/KeyIdentityExample";
 import ObjectStateExample from "./examples/ObjectStateExample";
+import ReducerExample from "./examples/ReducerExample";
 import RenderStateExample from "./examples/RenderStateExample";
+import TaskReducerExample from "./examples/TaskReducerExample";
 import VariableStateRefExample from "./examples/VariableStateRefExample";
 
-type ExampleName = "render" | "ref" | "object" | "array" | "key";
+type ExampleName =
+  | "render"
+  | "ref"
+  | "object"
+  | "array"
+  | "key"
+  | "reducer"
+  | "taskReducer";
 
 const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "render", label: "렌더링과 state" },
@@ -14,11 +23,13 @@ const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "object", label: "객체 state" },
   { id: "array", label: "배열 state" },
   { id: "key", label: "목록 key 비교" },
+  { id: "reducer", label: "useReducer" },
+  { id: "taskReducer", label: "할 일 reducer" },
 ];
 
 function App() {
   const [selectedExample, setSelectedExample] =
-    useState<ExampleName>("object");
+    useState<ExampleName>("taskReducer");
 
   function renderExample() {
     switch (selectedExample) {
@@ -30,6 +41,10 @@ function App() {
         return <ArrayStateExample />;
       case "key":
         return <KeyIdentityExample />;
+      case "reducer":
+        return <ReducerExample />;
+      case "taskReducer":
+        return <TaskReducerExample />;
       case "object":
         return <ObjectStateExample />;
     }
