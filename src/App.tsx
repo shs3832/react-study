@@ -6,6 +6,7 @@ import EventEffectExample from "./examples/EventEffectExample";
 import ImmerComparisonExample from "./examples/ImmerComparisonExample";
 import KeyIdentityExample from "./examples/KeyIdentityExample";
 import MemoExample from "./examples/MemoExample";
+import NavLinkExample from "./examples/NavLinkExample";
 import ObjectStateExample from "./examples/ObjectStateExample";
 import ReducerExample from "./examples/ReducerExample";
 import RenderStateExample from "./examples/RenderStateExample";
@@ -27,7 +28,8 @@ type ExampleName =
   | "eventEffect"
   | "memo"
   | "useMemo"
-  | "useCallback";
+  | "useCallback"
+  | "navLink";
 
 const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "render", label: "렌더링과 state" },
@@ -43,11 +45,12 @@ const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "memo", label: "memo 비교" },
   { id: "useMemo", label: "useMemo 계산" },
   { id: "useCallback", label: "useCallback 함수" },
+  { id: "navLink", label: "Router와 NavLink" },
 ];
 
 function App() {
   const [selectedExample, setSelectedExample] =
-    useState<ExampleName>("eventEffect");
+    useState<ExampleName>("navLink");
 
   function renderExample() {
     switch (selectedExample) {
@@ -75,6 +78,8 @@ function App() {
         return <UseMemoExample />;
       case "useCallback":
         return <UseCallbackExample />;
+      case "navLink":
+        return <NavLinkExample />;
       case "object":
         return <ObjectStateExample />;
     }

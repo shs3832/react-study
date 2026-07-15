@@ -199,6 +199,55 @@ input:focus-visible {
   border: 0;
 }
 
+.router-layout {
+  display: grid;
+  gap: 18px;
+}
+
+.router-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.router-link {
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  text-decoration: none;
+}
+
+.router-link:hover,
+.router-link.is-active {
+  border-color: var(--accent);
+  background: var(--accent-bg);
+}
+
+.router-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.router-outlet {
+  min-height: 120px;
+  padding: 18px;
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  background: var(--code-bg);
+}
+
+.router-outlet h3 {
+  margin-bottom: 0;
+}
+
+.router-page-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 14px;
+}
+
 @media (max-width: 640px) {
   .study-app {
     width: min(100% - 28px, 920px);
@@ -210,7 +259,8 @@ input:focus-visible {
   }
 
   .example-tabs button,
-  .button-group button {
+  .button-group button,
+  .router-link {
     flex: 1 1 100%;
   }
 
