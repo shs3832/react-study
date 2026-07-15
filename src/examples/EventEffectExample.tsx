@@ -2,12 +2,8 @@ import { useEffect, useState } from "react";
 
 type LogMode = "기본" | "상세";
 
-function WindowWidthTracker() {
+function useWindowWidth(logMode: LogMode) {
   const [windowWidth, setWindowWidth] = useState(() => window.innerWidth);
-  const [logMode, setLogMode] = useState<LogMode>("기본");
-  const handleModeChange = () => {
-    setLogMode((prev) => (prev === "기본" ? "상세" : "기본"));
-  };
   useEffect(() => {
     function handleResize() {
       if (logMode === "상세") {
@@ -26,6 +22,15 @@ function WindowWidthTracker() {
       window.removeEventListener("resize", handleResize);
     };
   }, [logMode]);
+  return windowWidth;
+}
+
+function WindowWidthTracker() {
+  const [logMode, setLogMode] = useState<LogMode>("기본");
+  const windowWidth = useWindowWidth(logMode);
+  const handleModeChange = () => {
+    setLogMode((prev) => (prev === "기본" ? "상세" : "기본"));
+  };
 
   return (
     <p className="result">

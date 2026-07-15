@@ -5,10 +5,13 @@ import ContextProviderExample from "./examples/ContextProviderExample";
 import EventEffectExample from "./examples/EventEffectExample";
 import ImmerComparisonExample from "./examples/ImmerComparisonExample";
 import KeyIdentityExample from "./examples/KeyIdentityExample";
+import MemoExample from "./examples/MemoExample";
 import ObjectStateExample from "./examples/ObjectStateExample";
 import ReducerExample from "./examples/ReducerExample";
 import RenderStateExample from "./examples/RenderStateExample";
 import TaskReducerExample from "./examples/TaskReducerExample";
+import UseCallbackExample from "./examples/UseCallbackExample";
+import UseMemoExample from "./examples/UseMemoExample";
 import VariableStateRefExample from "./examples/VariableStateRefExample";
 
 type ExampleName =
@@ -21,7 +24,10 @@ type ExampleName =
   | "taskReducer"
   | "immer"
   | "context"
-  | "eventEffect";
+  | "eventEffect"
+  | "memo"
+  | "useMemo"
+  | "useCallback";
 
 const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "render", label: "렌더링과 state" },
@@ -34,6 +40,9 @@ const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "immer", label: "Immer 비교" },
   { id: "context", label: "Context 범위" },
   { id: "eventEffect", label: "Handler와 Effect" },
+  { id: "memo", label: "memo 비교" },
+  { id: "useMemo", label: "useMemo 계산" },
+  { id: "useCallback", label: "useCallback 함수" },
 ];
 
 function App() {
@@ -60,6 +69,12 @@ function App() {
         return <ContextProviderExample />;
       case "eventEffect":
         return <EventEffectExample />;
+      case "memo":
+        return <MemoExample />;
+      case "useMemo":
+        return <UseMemoExample />;
+      case "useCallback":
+        return <UseCallbackExample />;
       case "object":
         return <ObjectStateExample />;
     }
