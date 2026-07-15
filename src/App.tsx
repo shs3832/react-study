@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import ArrayStateExample from "./examples/ArrayStateExample";
 import ContextProviderExample from "./examples/ContextProviderExample";
+import EventEffectExample from "./examples/EventEffectExample";
 import ImmerComparisonExample from "./examples/ImmerComparisonExample";
 import KeyIdentityExample from "./examples/KeyIdentityExample";
 import ObjectStateExample from "./examples/ObjectStateExample";
@@ -19,7 +20,8 @@ type ExampleName =
   | "reducer"
   | "taskReducer"
   | "immer"
-  | "context";
+  | "context"
+  | "eventEffect";
 
 const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "render", label: "렌더링과 state" },
@@ -31,11 +33,12 @@ const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "taskReducer", label: "할 일 reducer" },
   { id: "immer", label: "Immer 비교" },
   { id: "context", label: "Context 범위" },
+  { id: "eventEffect", label: "Handler와 Effect" },
 ];
 
 function App() {
   const [selectedExample, setSelectedExample] =
-    useState<ExampleName>("context");
+    useState<ExampleName>("eventEffect");
 
   function renderExample() {
     switch (selectedExample) {
@@ -55,6 +58,8 @@ function App() {
         return <ImmerComparisonExample />;
       case "context":
         return <ContextProviderExample />;
+      case "eventEffect":
+        return <EventEffectExample />;
       case "object":
         return <ObjectStateExample />;
     }
