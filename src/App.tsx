@@ -14,6 +14,7 @@ import TaskReducerExample from "./examples/TaskReducerExample";
 import UseCallbackExample from "./examples/UseCallbackExample";
 import UseMemoExample from "./examples/UseMemoExample";
 import VariableStateRefExample from "./examples/VariableStateRefExample";
+import UserManagementExample from "./features/users/UserManagementExample";
 
 type ExampleName =
   | "render"
@@ -29,7 +30,8 @@ type ExampleName =
   | "memo"
   | "useMemo"
   | "useCallback"
-  | "navLink";
+  | "navLink"
+  | "serverState";
 
 const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "render", label: "렌더링과 state" },
@@ -46,6 +48,7 @@ const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "useMemo", label: "useMemo 계산" },
   { id: "useCallback", label: "useCallback 함수" },
   { id: "navLink", label: "Router와 NavLink" },
+  { id: "serverState", label: "사용자 API" },
 ];
 
 function App() {
@@ -80,6 +83,8 @@ function App() {
         return <UseCallbackExample />;
       case "navLink":
         return <NavLinkExample />;
+      case "serverState":
+        return <UserManagementExample />;
       case "object":
         return <ObjectStateExample />;
     }

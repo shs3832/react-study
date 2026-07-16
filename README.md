@@ -71,6 +71,7 @@ route 설정
 
 - Phase 1~4: React 렌더링, 상태 모델링, Context·Effect, 최적화와 재사용 완료
 - Phase 5: Router와 URL State 완료
-- 다음 학습: Async Data와 Server State
+- Phase 6-A: 직접 fetch와 loading/error/empty/success 완료
+- 다음 학습: Phase 6-B — AbortController, 오래된 응답 차단, debounce
 
 상세 학습 기록과 회고는 별도 학습 계획 문서와 Notion의 `React 기본기 학습` 페이지에서 관리합니다.
