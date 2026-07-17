@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { fetchUsers, HttpError } from "./api";
 import type { RequestScenario, UsersState } from "./types";
 
@@ -32,12 +32,17 @@ export default function UserManagementExample() {
   const [usersState, setUsersState] = useState<UsersState>({
     status: "loading",
   });
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
+    let ignore = false;
+    const controller = new AbortController();
     async function loadUsers() {
       try {
-        const users = await fetchUsers(scenario);
-
+        const users = await fetchUsers(scenario, keyword, controller.signal);
+        if (ignore) {
+          return;
+        }
         if (users.length === 0) {
           setUsersState({ status: "empty" });
           return;
@@ -45,12 +50,25 @@ export default function UserManagementExample() {
 
         setUsersState({ status: "success", users });
       } catch (error) {
+        const isAbortError =
+          error instanceof Error && error.name === "AbortError";
+
+        if (ignore || isAbortError) {
+          return;
+        }
         setUsersState({ status: "error", message: getErrorMessage(error) });
       }
     }
 
-    void loadUsers();
-  }, [requestCount, scenario]);
+    const timerId = window.setTimeout(() => {
+      void loadUsers();
+    }, 500);
+    return () => {
+      ignore = true;
+      controller.abort();
+      window.clearTimeout(timerId);
+    };
+  }, [requestCount, scenario, keyword]);
 
   function handleScenarioChange(nextScenario: RequestScenario) {
     if (nextScenario === scenario) {
@@ -65,18 +83,30 @@ export default function UserManagementExample() {
     setRequestCount((prev) => prev + 1);
   }
 
+  function handleSearchKeyword(event: ChangeEvent<HTMLInputElement>) {
+    setKeyword(event.currentTarget.value);
+    setUsersState({ status: "loading" });
+  }
+
   return (
     <div className="example-content">
       <div>
-        <p className="eyebrow">Phase 6-A. Direct fetch</p>
-        <h2>사용자 목록과 Server State</h2>
+        <p className="eyebrow">Phase 6-B. Request control</p>
+        <h2>사용자 검색 요청 제어</h2>
         <p>
-          요청 상태를 선택한 뒤 화면과 DevTools Network 결과를 함께
-          확인해보세요.
+          검색어를 빠르게 입력한 뒤 화면과 DevTools Network 요청 수와 취소
+          상태를 함께 확인해보세요.
         </p>
       </div>
 
       <div className="button-group" aria-label="사용자 요청 상태 선택">
+        <label htmlFor="user-keyword">사용자 검색</label>
+        <input
+          id="user-keyword"
+          type="search"
+          value={keyword}
+          onChange={handleSearchKeyword}
+        />
         {scenarios.map((item) => (
           <button
             key={item.id}

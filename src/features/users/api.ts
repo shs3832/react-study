@@ -26,10 +26,18 @@ export class HttpError extends Error {
   }
 }
 
-function getRequestUrl(scenario: RequestScenario) {
+function getRequestUrl(scenario: RequestScenario, keyword: string) {
   switch (scenario) {
-    case "success":
-      return `${USERS_API_URL}/users?limit=5&select=id,firstName,lastName,email,company&delay=1200`;
+    case "success": {
+      const trimmedKeyword = keyword.trim();
+      const params = new URLSearchParams({
+        q: trimmedKeyword,
+        limit: "5",
+        select: "id,firstName,lastName,email,company",
+        delay: "1200",
+      });
+      return `${USERS_API_URL}/users/search?${params.toString()}`;
+    }
     case "empty":
       return `${USERS_API_URL}/users/search?q=__phase6_no_user__&delay=1200`;
     case "http-error":
@@ -81,8 +89,12 @@ function isUsersResponse(value: unknown): value is UsersResponse {
   return Array.isArray(response.users) && response.users.every(isApiUser);
 }
 
-export async function fetchUsers(scenario: RequestScenario): Promise<User[]> {
-  const response = await fetch(getRequestUrl(scenario));
+export async function fetchUsers(
+  scenario: RequestScenario,
+  keyword = "",
+  signal?: AbortSignal,
+): Promise<User[]> {
+  const response = await fetch(getRequestUrl(scenario, keyword), { signal });
 
   if (!response.ok) {
     throw new HttpError(response.status);
