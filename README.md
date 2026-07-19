@@ -44,6 +44,8 @@ npm run build
 - custom Hook과 cleanup
 - `memo`, `useMemo`, `useCallback`
 - Router와 URL State
+- 직접 fetch와 TanStack Query
+- Form 기본 원리
 
 ## Router와 URL State
 
@@ -67,6 +69,20 @@ route 설정
 → 각 Outlet에 렌더링되는 컴포넌트
 ```
 
+## Form 기본 원리
+
+`FormBasicsExample.tsx`에서 다음 흐름을 확인합니다.
+
+- controlled input과 uncontrolled input의 값 소유자
+- `label`, `id`, `name`, `FormData`의 역할
+- form value와 API payload의 분리 및 변환
+- submit 기본 동작 차단과 제출 시점 validation
+- `aria-invalid`, `aria-describedby`, 오류 메시지 연결
+- 제출 실패 시 첫 번째 오류 input으로 포커스 이동
+- 클라이언트 오류, 서버 field error, form 전체 오류의 책임 구분
+
+`scripts/function-return-example.mjs`에서는 이벤트 핸들러 학습 중 확인한 함수 참조, 함수 호출, 함수를 반환하는 함수의 차이를 콘솔에서 실행해봅니다.
+
 ## 현재 진행 상태
 
 - Phase 1~4: React 렌더링, 상태 모델링, Context·Effect, 최적화와 재사용 완료
@@ -74,6 +90,7 @@ route 설정
 - Phase 6-A: 직접 fetch와 loading/error/empty/success 완료
 - Phase 6-B: AbortController, 오래된 응답 차단, debounce 완료
 - Phase 6-C: 직접 fetch와 TanStack Query의 서버 상태 관리 책임 비교 완료
-- 다음 학습: Phase 7 — Forms, React 19, Tests
+- Phase 7-A: Form 기본 원리 완료
+- 다음 학습: Phase 7-B — React Hook Form과 Zod
 
 상세 학습 기록과 회고는 별도 학습 계획 문서와 Notion의 `React 기본기 학습` 페이지에서 관리합니다.

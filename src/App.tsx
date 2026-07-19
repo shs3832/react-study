@@ -3,6 +3,7 @@ import "./App.css";
 import ArrayStateExample from "./examples/ArrayStateExample";
 import ContextProviderExample from "./examples/ContextProviderExample";
 import EventEffectExample from "./examples/EventEffectExample";
+import FormBasicsExample from "./examples/FormBasicsExample";
 import ImmerComparisonExample from "./examples/ImmerComparisonExample";
 import KeyIdentityExample from "./examples/KeyIdentityExample";
 import MemoExample from "./examples/MemoExample";
@@ -33,7 +34,8 @@ type ExampleName =
   | "useCallback"
   | "navLink"
   | "serverState"
-  | "serverStateQuery";
+  | "serverStateQuery"
+  | "formBasics";
 
 const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "render", label: "렌더링과 state" },
@@ -52,6 +54,7 @@ const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "navLink", label: "Router와 NavLink" },
   { id: "serverState", label: "사용자 API (직접 fetch)" },
   { id: "serverStateQuery", label: "사용자 API (TanStack Query)" },
+  { id: "formBasics", label: "폼 기본 원리" },
 ];
 
 function App() {
@@ -90,6 +93,8 @@ function App() {
         return <UserManagementExample />;
       case "serverStateQuery":
         return <UserManagementQueryExample />;
+      case "formBasics":
+        return <FormBasicsExample />;
       case "object":
         return <ObjectStateExample />;
     }
