@@ -46,6 +46,7 @@ npm run build
 - Router와 URL State
 - 직접 fetch와 TanStack Query
 - Form 기본 원리
+- React Hook Form과 Zod
 
 ## Router와 URL State
 
@@ -83,6 +84,20 @@ route 설정
 
 `scripts/function-return-example.mjs`에서는 이벤트 핸들러 학습 중 확인한 함수 참조, 함수 호출, 함수를 반환하는 함수의 차이를 콘솔에서 실행해봅니다.
 
+## React Hook Form과 Zod
+
+`ReactHookFormExample.tsx`에서 Phase 7-A의 직접 state 관리 방식과 다음 책임 차이를 비교합니다.
+
+- `register`, `handleSubmit`, `defaultValues`, `formState`의 역할
+- Zod schema와 `zodResolver`를 통한 클라이언트 validation
+- `z.infer`로 schema에서 form value 타입 추론
+- `isSubmitting`과 submit 버튼 비활성화를 통한 중복 요청 방지
+- `setError`를 사용한 서버 field error와 form 전체 page error 분리
+- `aria-invalid`, `aria-describedby`, 오류 focus와 `role="alert"`
+- trim된 form value를 API의 `displayName` payload로 변환
+
+서버 오류는 실제 API 요청 대신 `duplicate`와 `server-error` 입력으로 모의 검증합니다.
+
 ## 현재 진행 상태
 
 - Phase 1~4: React 렌더링, 상태 모델링, Context·Effect, 최적화와 재사용 완료
@@ -91,6 +106,7 @@ route 설정
 - Phase 6-B: AbortController, 오래된 응답 차단, debounce 완료
 - Phase 6-C: 직접 fetch와 TanStack Query의 서버 상태 관리 책임 비교 완료
 - Phase 7-A: Form 기본 원리 완료
-- 다음 학습: Phase 7-B — React Hook Form과 Zod
+- Phase 7-B: React Hook Form과 Zod 완료
+- 다음 학습: Phase 7-C — React 19 Form과 Action
 
 상세 학습 기록과 회고는 별도 학습 계획 문서와 Notion의 `React 기본기 학습` 페이지에서 관리합니다.

@@ -9,6 +9,7 @@ import KeyIdentityExample from "./examples/KeyIdentityExample";
 import MemoExample from "./examples/MemoExample";
 import NavLinkExample from "./examples/NavLinkExample";
 import ObjectStateExample from "./examples/ObjectStateExample";
+import ReactHookFormExample from "./examples/ReactHookFormExample";
 import ReducerExample from "./examples/ReducerExample";
 import RenderStateExample from "./examples/RenderStateExample";
 import TaskReducerExample from "./examples/TaskReducerExample";
@@ -35,7 +36,8 @@ type ExampleName =
   | "navLink"
   | "serverState"
   | "serverStateQuery"
-  | "formBasics";
+  | "formBasics"
+  | "reactHookForm";
 
 const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "render", label: "렌더링과 state" },
@@ -55,6 +57,7 @@ const examples: Array<{ id: ExampleName; label: string }> = [
   { id: "serverState", label: "사용자 API (직접 fetch)" },
   { id: "serverStateQuery", label: "사용자 API (TanStack Query)" },
   { id: "formBasics", label: "폼 기본 원리" },
+  { id: "reactHookForm", label: "React Hook Form과 Zod" },
 ];
 
 function App() {
@@ -95,6 +98,8 @@ function App() {
         return <UserManagementQueryExample />;
       case "formBasics":
         return <FormBasicsExample />;
+      case "reactHookForm":
+        return <ReactHookFormExample />;
       case "object":
         return <ObjectStateExample />;
     }
