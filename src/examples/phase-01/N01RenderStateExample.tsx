@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function RenderStateExample() {
+function N01RenderStateExample() {
   console.log("RenderStateExample 함수 실행");
 
   const [count, setCount] = useState(0);
@@ -44,4 +44,4 @@ function RenderStateExample() {
   );
 }
 
-export default RenderStateExample;
+export default N01RenderStateExample;

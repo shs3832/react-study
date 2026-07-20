@@ -43,7 +43,7 @@ function taskReducer(tasks: Task[], action: TaskAction) {
   }
 }
 
-function TaskReducerExample() {
+function N06TaskReducerExample() {
   const nextTaskIdRef = useRef(3);
   const [draftTitle, setDraftTitle] = useState("");
   const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
@@ -114,4 +114,4 @@ function TaskReducerExample() {
   );
 }
 
-export default TaskReducerExample;
+export default N06TaskReducerExample;

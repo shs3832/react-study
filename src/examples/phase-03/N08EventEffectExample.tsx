@@ -42,7 +42,7 @@ function WindowWidthTracker() {
   );
 }
 
-function EventEffectExample() {
+function N08EventEffectExample() {
   const [message, setMessage] = useState("아직 구매하지 않았습니다.");
   const [lastName, setLastName] = useState("김");
   const [firstName, setFirstName] = useState("민수");
@@ -116,4 +116,4 @@ function EventEffectExample() {
   );
 }
 
-export default EventEffectExample;
+export default N08EventEffectExample;

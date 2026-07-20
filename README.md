@@ -32,7 +32,12 @@ npm run build
 
 ## 학습 예제
 
-`src/examples/`에 개념별 실행 예제를 둡니다.
+`src/examples/phase-01/`부터 `phase-07/`까지 커리큘럼 Phase별 실행 예제를 둡니다.
+파일명의 `N01`~`N16`은 Notion의 `React 기본기 01`~`React 기본기 16` 기록 번호이며,
+Phase 7 파일은 `N14Phase7A...`처럼 하위 Phase도 함께 표시합니다.
+
+Notion 04(Props와 컴포넌트 책임), 05(파생값과 State 모델링)는 여러 예제에서 반복해 확인한
+개념 기록이므로 현재 별도의 단일 실행 파일은 없습니다.
 
 - 렌더링과 state snapshot
 - 일반 변수, state, ref
@@ -47,10 +52,11 @@ npm run build
 - 직접 fetch와 TanStack Query
 - Form 기본 원리
 - React Hook Form과 Zod
+- React 19 Form Action과 optimistic UI
 
 ## Router와 URL State
 
-`NavLinkExample.tsx`에서 다음 흐름을 확인합니다.
+`phase-05/N10NavLinkExample.tsx`에서 다음 흐름을 확인합니다.
 
 - layout, index, nested, dynamic, wildcard route
 - `Link`, `NavLink`, `useNavigate`
@@ -72,7 +78,7 @@ route 설정
 
 ## Form 기본 원리
 
-`FormBasicsExample.tsx`에서 다음 흐름을 확인합니다.
+`phase-07/N14Phase7AFormBasicsExample.tsx`에서 다음 흐름을 확인합니다.
 
 - controlled input과 uncontrolled input의 값 소유자
 - `label`, `id`, `name`, `FormData`의 역할
@@ -86,7 +92,7 @@ route 설정
 
 ## React Hook Form과 Zod
 
-`ReactHookFormExample.tsx`에서 Phase 7-A의 직접 state 관리 방식과 다음 책임 차이를 비교합니다.
+`phase-07/N15Phase7BReactHookFormExample.tsx`에서 Phase 7-A의 직접 state 관리 방식과 다음 책임 차이를 비교합니다.
 
 - `register`, `handleSubmit`, `defaultValues`, `formState`의 역할
 - Zod schema와 `zodResolver`를 통한 클라이언트 validation
@@ -98,6 +104,26 @@ route 설정
 
 서버 오류는 실제 API 요청 대신 `duplicate`와 `server-error` 입력으로 모의 검증합니다.
 
+## React 19 Form Action
+
+`phase-07/N16Phase7CFormActionExample.tsx`에서 React 18의 submit handler 방식과 비교하며 다음 흐름을 확인합니다.
+
+- `<form action={...}>`과 submit 시점의 `FormData` 전달
+- 비동기 Action의 Promise와 `useFormStatus().pending`
+- `useActionState`의 이전 state, Action dispatcher, 결과 state 연결
+- success, field error, form 전체 page error 반환
+- `aria-invalid`, `aria-describedby`, `role="alert"` 연결
+- Action 성공 후 uncontrolled input 자동 초기화
+
+`phase-07/N16Phase7COptimisticNameExample.tsx`에서는 확정된 이름과 임시 화면값을 분리해 다음 흐름을 비교합니다.
+
+- `useState`의 확정값과 `useOptimistic`의 임시값
+- 서버 응답을 기다리는 동안 예상 결과를 먼저 표시
+- `await` 이후 확정 state 반영과 `startTransition`
+- `useFormStatus`의 실제 pending과 두 이름의 값 비교 차이
+
+두 예제의 비동기 처리는 실제 API가 아닌 2초 지연으로 모의합니다. optimistic 성공 흐름은 브라우저에서 검증했고, 실패 rollback은 확정값을 갱신하지 않으면 기준값으로 복귀하는 개념 범위로 확인했습니다.
+
 ## 현재 진행 상태
 
 - Phase 1~4: React 렌더링, 상태 모델링, Context·Effect, 최적화와 재사용 완료
@@ -107,6 +133,7 @@ route 설정
 - Phase 6-C: 직접 fetch와 TanStack Query의 서버 상태 관리 책임 비교 완료
 - Phase 7-A: Form 기본 원리 완료
 - Phase 7-B: React Hook Form과 Zod 완료
-- 다음 학습: Phase 7-C — React 19 Form과 Action
+- Phase 7-C: React 19 Form과 Action 완료
+- 다음 학습: Phase 7-D — 사용자 행동 중심 테스트
 
 상세 학습 기록과 회고는 별도 학습 계획 문서와 Notion의 `React 기본기 학습` 페이지에서 관리합니다.

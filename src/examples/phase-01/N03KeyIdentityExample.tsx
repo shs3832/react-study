@@ -1,5 +1,5 @@
 import { useState } from "react";
-import StudyCard from "../components/StudyCard";
+import StudyCard from "../../components/StudyCard";
 
 interface Task {
   id: number;
@@ -45,7 +45,7 @@ function TaskListDemo({ keyMode, tasks, onDelete }: TaskListDemoProps) {
   );
 }
 
-function KeyIdentityExample() {
+function N03KeyIdentityExample() {
   console.log("KeyIdentityExample render");
   const [resetKey, setResetKey] = useState(0);
   const [indexTasks, setIndexTasks] = useState(createInitialTasks);
@@ -100,4 +100,4 @@ function KeyIdentityExample() {
   );
 }
 
-export default KeyIdentityExample;
+export default N03KeyIdentityExample;

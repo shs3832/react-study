@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function ObjectStateExample() {
+function N03ObjectStateExample() {
   console.log("ObjectStateExample 함수 실행");
 
   const [user, setUser] = useState({
@@ -73,4 +73,4 @@ function ObjectStateExample() {
   );
 }
 
-export default ObjectStateExample;
+export default N03ObjectStateExample;

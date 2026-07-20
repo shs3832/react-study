@@ -12,7 +12,7 @@ type CreateUserPayload = {
   displayName: string;
 };
 
-export default function ReactHookFormExample() {
+export default function N15Phase7BReactHookFormExample() {
   const {
     register,
     handleSubmit,

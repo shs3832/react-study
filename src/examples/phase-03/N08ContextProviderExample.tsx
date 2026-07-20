@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import StudyCard from "../components/StudyCard";
+import StudyCard from "../../components/StudyCard";
 
 type Theme = "light" | "dark";
 
@@ -67,7 +67,7 @@ function Toolbar() {
   );
 }
 
-function ContextProviderExample() {
+function N08ContextProviderExample() {
   const [theme, setTheme] = useState<Theme>("dark");
 
   function toggleTheme() {
@@ -113,4 +113,4 @@ function ContextProviderExample() {
   );
 }
 
-export default ContextProviderExample;
+export default N08ContextProviderExample;

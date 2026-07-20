@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import StudyCard from "../components/StudyCard";
+import StudyCard from "../../components/StudyCard";
 
 type GreetingProps = {
   name: string;
@@ -19,7 +19,7 @@ const MemoizedGreeting = memo(function MemoizedGreeting({
   return <p className="result">안녕하세요, {name}님.</p>;
 });
 
-function MemoExample() {
+function N09MemoExample() {
   const [parentCount, setParentCount] = useState(0);
   const [name, setName] = useState("민수");
 
@@ -69,4 +69,4 @@ function MemoExample() {
   );
 }
 
-export default MemoExample;
+export default N09MemoExample;

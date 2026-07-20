@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-function VariableStateRefExample() {
+function N02VariableStateRefExample() {
   console.log("VariableStateRefExample 함수 실행");
 
   const [renderCount, setRenderCount] = useState(0);
@@ -57,4 +57,4 @@ function VariableStateRefExample() {
   );
 }
 
-export default VariableStateRefExample;
+export default N02VariableStateRefExample;

@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 
-function ArrayStateExample() {
+function N03ArrayStateExample() {
   const [tasks, setTasks] = useState([{ id: 1, title: "Check orders" }]);
   const [renderCount, setRenderCount] = useState(0);
   const nextTaskIdRef = useRef(2);
@@ -101,4 +101,4 @@ function ArrayStateExample() {
   );
 }
 
-export default ArrayStateExample;
+export default N03ArrayStateExample;

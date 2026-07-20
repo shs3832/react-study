@@ -33,7 +33,7 @@ const MemoizedProductList = memo(function MemoizedProductList({
   );
 });
 
-function UseMemoExample() {
+function N09UseMemoExample() {
   const [parentCount, setParentCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState<Category>("문구");
 
@@ -96,4 +96,4 @@ function UseMemoExample() {
   );
 }
 
-export default UseMemoExample;
+export default N09UseMemoExample;

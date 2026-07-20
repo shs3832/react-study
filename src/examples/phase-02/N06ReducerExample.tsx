@@ -21,7 +21,7 @@ function counterReducer(currentCount: number, action: CounterAction) {
   }
 }
 
-function ReducerExample() {
+function N06ReducerExample() {
   const [count, dispatch] = useReducer(counterReducer, 0);
 
   return (
@@ -64,4 +64,4 @@ function ReducerExample() {
   );
 }
 
-export default ReducerExample;
+export default N06ReducerExample;

@@ -1,5 +1,5 @@
 import { memo, useCallback, useState } from "react";
-import StudyCard from "../components/StudyCard";
+import StudyCard from "../../components/StudyCard";
 
 type Category = "전체" | "문구" | "전자";
 
@@ -21,7 +21,7 @@ const MemoizedActionButton = memo(function MemoizedActionButton({
   );
 });
 
-function UseCallbackExample() {
+function N09UseCallbackExample() {
   const [parentCount, setParentCount] = useState(0);
   const [selectedCategory, setSelectedCategory] =
     useState<Category>("전체");
@@ -97,4 +97,4 @@ function UseCallbackExample() {
   );
 }
 
-export default UseCallbackExample;
+export default N09UseCallbackExample;

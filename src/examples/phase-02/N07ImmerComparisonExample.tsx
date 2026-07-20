@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import { useReducer } from "react";
-import StudyCard from "../components/StudyCard";
+import StudyCard from "../../components/StudyCard";
 
 type Task = {
   id: number;
@@ -54,7 +54,7 @@ function immerTaskReducer(tasks: Task[], action: TaskAction) {
   });
 }
 
-function ImmerComparisonExample() {
+function N07ImmerComparisonExample() {
   const [directTasks, directDispatch] = useReducer(
     directTaskReducer,
     initialTasks,
@@ -127,4 +127,4 @@ function ImmerComparisonExample() {
   );
 }
 
-export default ImmerComparisonExample;
+export default N07ImmerComparisonExample;

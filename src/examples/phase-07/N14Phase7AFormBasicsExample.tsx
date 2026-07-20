@@ -1,6 +1,6 @@
 import { useRef, useState, type ChangeEvent, type SubmitEvent } from "react";
 
-export default function FormBasicsExample() {
+export default function N14Phase7AFormBasicsExample() {
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const [hasSubmitted, setHasSubmitted] = useState(false);

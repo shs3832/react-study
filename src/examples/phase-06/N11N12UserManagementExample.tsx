@@ -1,7 +1,6 @@
 import { useEffect, useState, type ChangeEvent } from "react";
-import { fetchUsers, HttpError } from "./api";
-import type { RequestScenario } from "./types";
-import { useQuery } from "@tanstack/react-query";
+import { fetchUsers, HttpError } from "../../features/users/api";
+import type { RequestScenario, UsersState } from "../../features/users/types";
 
 const scenarios: Array<{ id: RequestScenario; label: string }> = [
   { id: "success", label: "성공" },
@@ -27,51 +26,76 @@ function getErrorMessage(error: unknown) {
   return "알 수 없는 오류가 발생했습니다.";
 }
 
-export default function UserManagementQueryExample() {
+export default function N11N12UserManagementExample() {
   const [scenario, setScenario] = useState<RequestScenario>("success");
+  const [requestCount, setRequestCount] = useState(0);
+  const [usersState, setUsersState] = useState<UsersState>({
+    status: "loading",
+  });
   const [keyword, setKeyword] = useState("");
-  const [debouncedKeyword, setDebouncedKeyword] = useState(keyword);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedKeyword(keyword);
+    let ignore = false;
+    const controller = new AbortController();
+    async function loadUsers() {
+      try {
+        const users = await fetchUsers(scenario, keyword, controller.signal);
+        if (ignore) {
+          return;
+        }
+        if (users.length === 0) {
+          setUsersState({ status: "empty" });
+          return;
+        }
+
+        setUsersState({ status: "success", users });
+      } catch (error) {
+        const isAbortError =
+          error instanceof Error && error.name === "AbortError";
+
+        if (ignore || isAbortError) {
+          return;
+        }
+        setUsersState({ status: "error", message: getErrorMessage(error) });
+      }
+    }
+
+    const timerId = window.setTimeout(() => {
+      void loadUsers();
     }, 500);
     return () => {
-      clearTimeout(timer);
+      ignore = true;
+      controller.abort();
+      window.clearTimeout(timerId);
     };
-  }, [keyword]);
-
-  const usersQuery = useQuery({
-    queryKey: ["users", { scenario, keyword: debouncedKeyword }],
-    queryFn: ({ signal }) => fetchUsers(scenario, debouncedKeyword, signal),
-    retry: false,
-    staleTime: 60_000,
-    gcTime: 300_000,
-  });
+  }, [requestCount, scenario, keyword]);
 
   function handleScenarioChange(nextScenario: RequestScenario) {
     if (nextScenario === scenario) {
       return;
     }
+    setUsersState({ status: "loading" });
     setScenario(nextScenario);
   }
 
   function handleReload() {
-    void usersQuery.refetch();
+    setUsersState({ status: "loading" });
+    setRequestCount((prev) => prev + 1);
   }
 
   function handleSearchKeyword(event: ChangeEvent<HTMLInputElement>) {
     setKeyword(event.currentTarget.value);
+    setUsersState({ status: "loading" });
   }
 
   return (
     <div className="example-content">
       <div>
-        <p className="eyebrow">Phase 6-C. TanStack Query</p>
-        <h2>TanStack Query로 사용자 목록 관리</h2>
+        <p className="eyebrow">Phase 6-B. Request control</p>
+        <h2>사용자 검색 요청 제어</h2>
         <p>
-          같은 검색 조건의 캐시 재사용과 재요청 상태를 화면과 DevTools
-          Network에서 함께 확인해보세요.
+          검색어를 빠르게 입력한 뒤 화면과 DevTools Network 요청 수와 취소
+          상태를 함께 확인해보세요.
         </p>
       </div>
 
@@ -89,8 +113,8 @@ export default function UserManagementQueryExample() {
             type="button"
             className={scenario === item.id ? "is-active" : ""}
             aria-pressed={scenario === item.id}
+            disabled={usersState.status === "loading"}
             onClick={() => handleScenarioChange(item.id)}
-            disabled={usersQuery.isFetching}
           >
             {item.label}
           </button>
@@ -98,36 +122,32 @@ export default function UserManagementQueryExample() {
         <button
           type="button"
           onClick={handleReload}
-          disabled={usersQuery.isFetching}
+          disabled={usersState.status === "loading"}
         >
           다시 불러오기
         </button>
       </div>
 
-      {usersQuery.isPending && (
+      {usersState.status === "loading" && (
         <p className="result" role="status">
           사용자 목록을 불러오는 중입니다.
         </p>
       )}
 
-      {usersQuery.isError && (
+      {usersState.status === "error" && (
         <div className="request-error" role="alert">
           <strong>사용자 목록을 불러오지 못했습니다.</strong>
-          <p>{getErrorMessage(usersQuery.error)}</p>
+          <p>{usersState.message}</p>
         </div>
       )}
 
-      {usersQuery.isSuccess && usersQuery.data.length === 0 && (
+      {usersState.status === "empty" && (
         <p className="result">조건에 맞는 사용자가 없습니다.</p>
       )}
 
-      {usersQuery.isFetching && !usersQuery.isPending && (
-        <p role="status">사용자 목록을 새로고침하는 중입니다.</p>
-      )}
-
-      {usersQuery.isSuccess && usersQuery.data.length > 0 && (
+      {usersState.status === "success" && (
         <ul className="user-list">
-          {usersQuery.data.map((user) => (
+          {usersState.users.map((user) => (
             <li key={user.id}>
               <div>
                 <strong>{user.name}</strong>

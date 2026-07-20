@@ -149,7 +149,7 @@ function NotFoundPage() {
   );
 }
 
-export default function NavLinkExample() {
+export default function N10NavLinkExample() {
   return (
     <div className="example-content">
       <div>

@@ -22,11 +22,41 @@
   text-transform: uppercase;
 }
 
+.example-groups {
+  display: grid;
+  gap: 20px;
+}
+
+.example-group {
+  display: grid;
+  gap: 8px;
+}
+
+.example-group h2 {
+  margin: 0;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 13px;
+}
+
 .example-tabs,
 .button-group {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+}
+
+.example-tabs button {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.example-notion-number {
+  color: var(--accent);
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 button,
