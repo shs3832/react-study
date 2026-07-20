@@ -26,6 +26,7 @@ npm run dev
 검증 명령:
 
 ```bash
+npm test -- --run
 npm run lint
 npm run build
 ```
@@ -33,7 +34,7 @@ npm run build
 ## 학습 예제
 
 `src/examples/phase-01/`부터 `phase-07/`까지 커리큘럼 Phase별 실행 예제를 둡니다.
-파일명의 `N01`~`N16`은 Notion의 `React 기본기 01`~`React 기본기 16` 기록 번호이며,
+파일명의 `N01`~`N17`은 Notion의 `React 기본기 01`~`React 기본기 17` 기록 번호이며,
 Phase 7 파일은 `N14Phase7A...`처럼 하위 Phase도 함께 표시합니다.
 
 Notion 04(Props와 컴포넌트 책임), 05(파생값과 State 모델링)는 여러 예제에서 반복해 확인한
@@ -53,6 +54,7 @@ Notion 04(Props와 컴포넌트 책임), 05(파생값과 State 모델링)는 여
 - Form 기본 원리
 - React Hook Form과 Zod
 - React 19 Form Action과 optimistic UI
+- 사용자 행동 중심 테스트와 MSW
 
 ## Router와 URL State
 
@@ -124,6 +126,19 @@ route 설정
 
 두 예제의 비동기 처리는 실제 API가 아닌 2초 지연으로 모의합니다. optimistic 성공 흐름은 브라우저에서 검증했고, 실패 rollback은 확정값을 갱신하지 않으면 기준값으로 복귀하는 개념 범위로 확인했습니다.
 
+## 사용자 행동 중심 테스트
+
+`N17Phase7D...test.tsx` 파일에서 Vitest와 Testing Library를 사용해 다음 흐름을 검증합니다.
+
+- `render`, `screen`, `userEvent`, jest-dom matcher의 책임
+- 현재 존재하는 요소의 `getBy`, 나중에 나타나는 요소의 `findBy`, 부재 확인의 `queryBy`
+- Form 기본 예제의 입력, validation, 오류 해제, ARIA 연결과 focus
+- Form Action의 pending, success, field error, page error와 uncontrolled input 초기화
+- MSW가 실제 `fetch` 요청을 가로채 성공 JSON과 HTTP 500 응답을 제공하는 흐름
+- DOM `cleanup`과 테스트별 MSW handler `resetHandlers`
+
+테스트는 내부 state나 함수 호출보다 사용자가 수행하는 행동과 화면에서 관찰할 수 있는 결과를 우선합니다. AI가 테스트 초안을 만들 수 있지만, 사용자 시나리오와 assertion의 의미·위치는 개발자가 검토합니다.
+
 ## 현재 진행 상태
 
 - Phase 1~4: React 렌더링, 상태 모델링, Context·Effect, 최적화와 재사용 완료
@@ -134,6 +149,7 @@ route 설정
 - Phase 7-A: Form 기본 원리 완료
 - Phase 7-B: React Hook Form과 Zod 완료
 - Phase 7-C: React 19 Form과 Action 완료
-- 다음 학습: Phase 7-D — 사용자 행동 중심 테스트
+- Phase 7-D: 사용자 행동 중심 테스트 완료
+- React 기본기 스터디 완료 — 다음 학습은 별도 Next.js 계획으로 진행
 
 상세 학습 기록과 회고는 별도 학습 계획 문서와 Notion의 `React 기본기 학습` 페이지에서 관리합니다.
